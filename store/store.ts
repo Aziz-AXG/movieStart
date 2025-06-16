@@ -1,15 +1,41 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { typeSelectedMovie } from '~/interfaces/types';
 
-export interface BearState {
-  bears: number;
-  increasePopulation: () => void;
-  removeAllBears: () => void;
-  updateBears: (newBears: number) => void;
+interface MovieStore {
+  selectedIDS: typeSelectedMovie[];
+  toggleMovie: (movied: typeSelectedMovie) => void;
+  addFrMovie: (movied: typeSelectedMovie) => void;
+  dleatFrMovie: (movied: typeSelectedMovie) => void;
+  setMovie: (ids: typeSelectedMovie[]) => void;
 }
 
-export const useStore = create<BearState>((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
-  updateBears: (newBears) => set({ bears: newBears }),
-}));
+export const useMovieStore = create<MovieStore>()(
+  persist(
+    (set, get) => ({
+      selectedIDS: [],
+      toggleMovie: (movied) =>
+        set((state) => ({
+          selectedIDS: state.selectedIDS.some((movie) => movie.imdbID === movied.imdbID)
+            ? state.selectedIDS.filter((movie) => movie.imdbID !== movied.imdbID)
+            : [...state.selectedIDS, movied],
+        })),
+      addFrMovie: (movied) =>
+        set((state) => ({
+          selectedIDS: state.selectedIDS.some((movie) => movie.imdbID === movied.imdbID)
+            ? state.selectedIDS
+            : [...state.selectedIDS, movied],
+        })),
+      dleatFrMovie: (movied) =>
+        set((state) => ({
+          selectedIDS: state.selectedIDS.some((movie) => movie.imdbID === movied.imdbID)
+            ? state.selectedIDS.filter((movie) => movie.imdbID !== movied.imdbID)
+            : state.selectedIDS,
+        })),
+      setMovie: (ids) => set({ selectedIDS: ids }),
+    }),
+    {
+      name: 'movie-storage', // name of the item in the storage (must be unique)
+    }
+  )
+);

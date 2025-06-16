@@ -3,31 +3,24 @@
     "name": "movieStart",
     "slug": "movieStart",
     "version": "1.0.0",
-
     "scheme": "movieStart",
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": ["expo-router"],
+    "jsEngine": "hermes",
     "experiments": {
       "typedRoutes": true,
-
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "newArchEnabled": true
     },
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -35,7 +28,25 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.muntaziraj.movieStart"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "3b6eab25-1f23-438f-994e-89f97dc2e84a"
       }
-    }
+    },
+    "owner": "muntaziraj"
   }
 }
