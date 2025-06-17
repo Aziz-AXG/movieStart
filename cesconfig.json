@@ -9,10 +9,7 @@
         "type": "stack"
       }
     },
-    {
-      "name": "tamagui",
-      "type": "styling"
-    },
+
     {
       "name": "zustand",
       "type": "state-management"

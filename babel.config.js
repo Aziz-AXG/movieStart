@@ -1,43 +1,15 @@
 module.exports = function (api) {
   api.cache(true);
-
-  const plugins = [];
-
-  // 💡 مكوّن Tamagui
-  plugins.push([
-    '@tamagui/babel-plugin',
-    {
-      components: ['tamagui'],
-      config: './tamagui.config.ts',
-    },
-  ]);
-
-  
-
-  // ✅ مكوّن Reanimated — لازم يكون آخر plugin دائمًا
-  plugins.push('react-native-reanimated/plugin');
-
   return {
-    presets: ['babel-preset-expo'],
-    plugins,
-  };
-};
+    presets: [
+      "babel-preset-expo",
+      "nativewind/babel",
+    ],
+      plugins: [
+          ["babel-plugin-transform-import-meta", { module: "ES6", polyfill: true }],
+          "react-native-reanimated/plugin",
+      ],
+  }
+}
 
 
-// module.exports = function (api) {
-//   api.cache(true);
-
-//   return {
-//     presets: ['babel-preset-expo'],
-//     plugins: [
-//       'nativewind/babel',
-//       [
-//         '@tamagui/babel-plugin',
-//         {
-//           components: ['tamagui'],
-//           config: './tamagui.config.ts',
-//         },
-//       ],
-//     ],
-//   };
-// };
