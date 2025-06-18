@@ -4,6 +4,7 @@ import Animated from "react-native-reanimated";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useThemeStore } from "@/store/themeStore";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { sharedElementTransition } from "@/utils/SharedElementTransition";
 
 export default function ThemeScreen() {
   const { theme, setTheme } = useThemeStore();
@@ -26,7 +27,10 @@ export default function ThemeScreen() {
           onPress={() => setTheme("light")}
           color={theme === "light" ? "#1D3D47" : "gray"}
         />
-        <Animated.View sharedTransitionTag="react-logo">
+        <Animated.View
+          sharedTransitionTag="react-logo"
+          sharedTransitionStyle={sharedElementTransition}
+        >
           <Image
             source={require("../../assets/images/react-logo.png")}
             style={{ width: 200, height: 200 }}
