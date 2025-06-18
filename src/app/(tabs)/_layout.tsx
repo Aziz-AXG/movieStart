@@ -1,4 +1,3 @@
-import { HapticTab } from "@/components/ui/HapticTab";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
@@ -13,7 +12,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarActiveTintColor: themeColor.primary,
         tabBarInactiveTintColor: themeColor.icon,
-        tabBarButton: HapticTab,
+
         tabBarStyle: {
           ...(Platform.OS === "ios" ? { position: "absolute" } : {}),
           backgroundColor: themeColor.background,

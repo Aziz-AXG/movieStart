@@ -4,8 +4,17 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { useColorScheme } from "react-native";
+import { enableScreens } from "react-native-screens";
 
 import "@/global.css";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+
+// Enable screens for better performance and shared transitions
+enableScreens();
 
 SplashScreen.preventAutoHideAsync();
 
@@ -13,7 +22,7 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/MadaniArabicDEMO-Regular.otf"),
+    SpaceMono: require("@/assets/fonts/MadaniArabicDEMO-Regular.otf"),
   });
 
   useEffect(() => {
@@ -25,7 +34,7 @@ export default function RootLayout() {
   }, [loaded]);
 
   return (
-    <>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
       <Stack
         screenOptions={{
@@ -37,6 +46,6 @@ export default function RootLayout() {
       >
         <Stack.Screen name="(tabs)" />
       </Stack>
-    </>
+    </ThemeProvider>
   );
 }
