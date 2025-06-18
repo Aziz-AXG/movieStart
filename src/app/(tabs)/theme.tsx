@@ -1,15 +1,16 @@
-import { useRouter } from "expo-router";
-import { Button, ScrollView, Image } from "react-native";
-import Animated from "react-native-reanimated";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useThemeStore } from "@/store/themeStore";
+import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { Button, Image, ScrollView } from "react-native";
+import Animated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { sharedElementTransition } from "@/utils/SharedElementTransition";
 
 export default function ThemeScreen() {
   const { theme, setTheme } = useThemeStore();
   const themeColor = useThemeColor();
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <SafeAreaView
@@ -27,16 +28,13 @@ export default function ThemeScreen() {
           onPress={() => setTheme("light")}
           color={theme === "light" ? "#1D3D47" : "gray"}
         />
-        <Animated.View
-          sharedTransitionTag="react-logo"
-          sharedTransitionStyle={sharedElementTransition}
-        >
+        <Animated.View sharedTransitionTag="react-logo">
           <Image
             source={require("../../assets/images/react-logo.png")}
             style={{ width: 200, height: 200 }}
           />
         </Animated.View>
-        <Button title="Go to Home" onPress={() => router.push("/(tabs)")} />
+        <Button title={t("home")} onPress={() => router.push("/(tabs)")} />
       </ScrollView>
     </SafeAreaView>
   );
